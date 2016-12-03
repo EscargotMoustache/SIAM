@@ -13,11 +13,6 @@ using namespace std;
 void affichage (Plateau plat,vector<Pion> E, vector<Pion> R, Console*Console,int i)
 {
     plat.afficherPlateau();
-using namespace std;
-
-void affichage (Plateau plat,vector<Pion> E, vector<Pion> R, Console*Console,int i)
-{
-    plat.afficherPlateau();
     Console->gotoLigCol(1,1);
     for ( auto& elem : E)
     {

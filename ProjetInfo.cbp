@@ -30,16 +30,24 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="animal.cpp" />
 		<Unit filename="animal.h" />
+		<Unit filename="case.cpp" />
+		<Unit filename="case.h" />
 		<Unit filename="console.cpp" />
 		<Unit filename="console.h" />
 		<Unit filename="includes.h" />
+		<Unit filename="joueur.cpp" />
 		<Unit filename="joueur.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="partie.cpp" />
 		<Unit filename="partie.h" />
+		<Unit filename="pion.cpp" />
 		<Unit filename="pion.h" />
+		<Unit filename="plateau.cpp" />
 		<Unit filename="plateau.h" />
 		<Extensions>
 			<code_completion />

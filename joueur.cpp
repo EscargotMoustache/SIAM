@@ -1,7 +1,6 @@
 #include "joueur.h"
 #include <vector>
 using namespace std;
->>>>>>> origin/master
 
 Joueur::Joueur()
 {

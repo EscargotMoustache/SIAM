@@ -10,7 +10,7 @@ using namespace std;
 ///sous programme pour afficher le plateau avec les pions
 ///je sais pas s'il faut le faire directement avec la méthode
 /// le i sert juste à les afficher les uns en dessous des autres
-void affichage (Plateau plat,vector<Pion> E, vector<Pion> R, Console*Console,int i)
+void affichage (Plateau plat,vector<Animal> E, vector<Animal> R, Console*Console,int i)
 {
     plat.afficherPlateau();
     Console->gotoLigCol(1,1);
@@ -29,8 +29,8 @@ void affichage (Plateau plat,vector<Pion> E, vector<Pion> R, Console*Console,int
 }
 int main()
 {
-    vector <Pion> E_vect;
-    vector <Pion> R_vect;
+    vector <Animal> E_vect;
+    vector <Animal> R_vect;
     Console*pConsole;
     Joueur jou;
     int j=0;

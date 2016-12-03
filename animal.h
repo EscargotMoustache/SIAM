@@ -14,7 +14,7 @@ private:
 
 public:
     Animal();
-    Animal(std::string _nom);
+    Animal(std::string _nom,float _resistance, bool _actif,float _force);
     ~Animal();
     void entrer();
     void deplacer();

@@ -41,8 +41,8 @@ int main()
     Plateau plat;
     for (int i=0;i<5;i++)
     {
-        E_vect.push_back(Animal("E"));
-        R_vect.push_back(Animal("R"));
+        E_vect.push_back(Animal("E",1,false,1));
+        R_vect.push_back(Animal("R",1,false,1));
     }
 
     affichage(plat,E_vect,R_vect,pConsole,j);

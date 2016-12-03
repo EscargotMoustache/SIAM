@@ -16,7 +16,7 @@ protected:
 
 public:
     Pion();
-    Pion(std::string _nom);
+    Pion(std::string _nom,float _resistance,bool _actif);
     ~Pion();
     std::string getnom() const;
 };

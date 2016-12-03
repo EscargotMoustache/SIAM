@@ -13,6 +13,11 @@ using namespace std;
 void affichage (Plateau plat,vector<Pion> E, vector<Pion> R, Console*Console,int i)
 {
     plat.afficherPlateau();
+using namespace std;
+
+void affichage (Plateau plat,vector<Pion> E, vector<Pion> R, Console*Console,int i)
+{
+    plat.afficherPlateau();
     Console->gotoLigCol(1,1);
     for ( auto& elem : E)
     {
@@ -25,6 +30,7 @@ void affichage (Plateau plat,vector<Pion> E, vector<Pion> R, Console*Console,int
         i=i+1;
         Console->gotoLigCol(1+i,20);
     }
+    i=0;
 }
 int main()
 {
@@ -35,6 +41,7 @@ int main()
     int j=0;
     int tour=1;
     int* adresse_tour=&tour;
+    int i=0;
     char choix;
     Plateau plat;
     for (int i=0;i<5;i++)
@@ -64,5 +71,16 @@ int main()
     }while(choix!='1');
 
     pConsole->gotoLigCol(10,0);
+    affichage(plat,E_vect,R_vect,pConsole,i);
+    pConsole->gotoLigCol(7,0);
+    cout << "Hello world!" << endl;
+    cin >> choix;
+
+    if (choix=='a')
+    {
+        E_vect.pop_back();
+        system("cls");
+    }
+    affichage(plat,E_vect,R_vect,pConsole,i);
     return 0;
 }

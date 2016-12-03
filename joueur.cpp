@@ -13,7 +13,7 @@ Joueur::~Joueur()
 }
 
 ///ça marche pas donc je RQ :)
-void Joueur::entrerAnimal(vector<Pion> E, vector<Pion> R, int*tour)
+void Joueur::entrerAnimal(vector<Pion>& E, vector<Pion>& R, int*tour)
 {
     if (*tour==1)
     {

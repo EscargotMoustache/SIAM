@@ -1,8 +1,12 @@
 #ifndef ANIMAL_H_INCLUDED
 #define ANIMAL_H_INCLUDED
 
-#include "includes.h"
+#include <iostream>
+#include <vector>
+#include <string>
 
+// Headers du projet
+#include "pion.h"
 class Animal : public Pion {
 private:
     char m_direction;
@@ -10,6 +14,7 @@ private:
 
 public:
     Animal();
+    Animal(std::string _nom);
     ~Animal();
     void entrer();
     void deplacer();

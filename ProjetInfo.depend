@@ -1,0 +1,74 @@
+# depslib dependency file v1.0
+1480775125 source:c:\users\john\desktop\c++\projet 3\siam\console.cpp
+	"console.h"
+	<conio.h>
+	<windows.h>
+
+1480775125 c:\users\john\desktop\c++\projet 3\siam\console.h
+	<iostream>
+
+1480786469 source:c:\users\john\desktop\c++\projet 3\siam\main.cpp
+	<iostream>
+	<vector>
+	<cstdlib>
+	<stdlib.h>
+	"plateau.h"
+	"animal.h"
+	"joueur.h"
+
+1480779379 source:c:\users\john\desktop\c++\projet 3\siam\plateau.cpp
+	"plateau.h"
+
+1480784116 c:\users\john\desktop\c++\projet 3\siam\plateau.h
+	<iostream>
+	<vector>
+	<string>
+	"pion.h"
+	"console.h"
+	"case.h"
+
+1480782429 c:\users\john\desktop\c++\projet 3\siam\pion.h
+	<iostream>
+	<vector>
+	<string>
+
+1480779015 c:\users\john\desktop\c++\projet 3\siam\case.h
+	<iostream>
+	<vector>
+	<string>
+
+1480782429 source:c:\users\john\desktop\c++\projet 3\siam\pion.cpp
+	"pion.h"
+
+1480779357 source:c:\users\john\desktop\c++\projet 3\siam\case.cpp
+	"case.h"
+
+1480781166 source:c:\users\john\desktop\c++\projet 3\siam\animal.cpp
+	"animal.h"
+
+1480782429 c:\users\john\desktop\c++\projet 3\siam\animal.h
+	<iostream>
+	<vector>
+	<string>
+	"pion.h"
+
+1480786469 source:c:\users\john\desktop\c++\projet 3\siam\joueur.cpp
+	"joueur.h"
+	<vector>
+
+1480785097 c:\users\john\desktop\c++\projet 3\siam\joueur.h
+	<iostream>
+	<vector>
+	<string>
+	"animal.h"
+
+1480780151 source:c:\users\john\desktop\c++\projet 3\siam\partie.cpp
+	"partie.h"
+
+1480780391 c:\users\john\desktop\c++\projet 3\siam\partie.h
+	<iostream>
+	<vector>
+	<string>
+	"plateau.h"
+	"joueur.h"
+

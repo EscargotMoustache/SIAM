@@ -1,7 +1,12 @@
 #ifndef JOUEUR_H_INCLUDED
 #define JOUEUR_H_INCLUDED
 
-#include "includes.h"
+#include <iostream>
+#include <vector>
+#include <string>
+
+// Headers du projet
+#include "animal.h"
 
 class Joueur {
 private:
@@ -11,7 +16,7 @@ private:
 public:
     Joueur();
     ~Joueur();
-    void entrerAnimal();
+    void entrerAnimal(std::vector<Pion> E, std::vector<Pion> R, int*tour);
     void deplacerAnimal();
     void orienterAnimal();
     void sortirAnimal();

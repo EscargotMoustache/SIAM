@@ -6,10 +6,13 @@ Joueur::Joueur()
 {
 
 }
-Joueur::Joueur(std::string _nom,std::vector<Animal> _animaux)
+Joueur::Joueur(std::string _nom)
 {
-    m_nom=_nom;
-    m_animaux=_animaux;
+    for (int i=0;i<5;i++)
+    {
+        m_animaux.push_back(Animal(_nom,1,false,1));
+        //R_vect.push_back(Animal("R",1,false,1));
+    }
 }
 
 Joueur::~Joueur()
@@ -17,15 +20,11 @@ Joueur::~Joueur()
 
 }
 
-void Joueur::entrerAnimal(vector<Animal>& E, vector<Animal>& R, int _nbtour)
+void Joueur::entrerAnimal()
 {
-    if (_nbtour==1)
-    {
-        E.pop_back();
-    }
-    else
-    {
-        R.pop_back();
-    }
-
+        this->m_animaux.pop_back();
+}
+std::vector<Animal> Joueur::getanimaux() const
+{
+    return m_animaux;
 }

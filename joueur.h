@@ -15,13 +15,14 @@ private:
 
 public:
     Joueur();
-    Joueur(std::string _nom,std::vector<Animal> _animaux);
+    Joueur(std::string _nom);
     ~Joueur();
-    void entrerAnimal(std::vector<Animal>& E, std::vector<Animal>& R, int _nbtour);
+    void entrerAnimal();
     void deplacerAnimal();
     void orienterAnimal();
     void sortirAnimal();
     void pousserAnimal();
+    std::vector<Animal> getanimaux() const;
 
 };
 

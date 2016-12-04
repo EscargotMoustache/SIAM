@@ -16,13 +16,14 @@ class Partie {
 private:
     Plateau m_plateau;
     int m_nbTour;
-    std::vector<Joueur> vect;
+    std::vector<Joueur> m_joueurs;
 
 public:
     Partie();
     ~Partie();
-    void bouclePartie(Plateau plat,Joueur jou,std::vector<Animal> E_vect,std::vector<Animal> R_vect,Console*pConsole,int i,int _nbtour);
-    void menu(Partie part,Plateau plat,Joueur jou,std::vector<Animal> E_vect,std::vector<Animal> R_vect,Console*pConsole,int i,int _nbtour,int*choix);
+    void bouclePartie(Console*pConsole);
+    void menu(Console*pConsole);
+    void afficher(Console*pConsole);
 };
 
 #endif // PARTIE_H_INCLUDED

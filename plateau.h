@@ -20,9 +20,8 @@ private:
 
 public:
     Plateau();
-    Plateau(std::vector<std::vector<Case> > _case);
     ~Plateau();
-    void afficherPlateau(Plateau plat,std::vector<Animal> E,std::vector<Animal> R,Console*pConsole,int i);
+    void afficherPlateau(Console*pConsole);
 };
 
 #endif // PLATEAU_H_INCLUDED

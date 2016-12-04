@@ -31,25 +31,37 @@ void Partie::bouclePartie(Console*pConsole)
 void Partie::menu(Console*pConsole)
 {
     int choix=0;
-    std::cout << " Bienvenu dans notre jeu SIAM !" <<std::endl;
-    std::cout << " Que voulez vous faire ?" <<std::endl;
-    std::cout << " 1. Jouer" <<std::endl;
-    std::cout << " 2. Voir les regles" <<std::endl;
-    std::cout << " 3. Quitter" <<std::endl;
-    std::cin >> choix;
-    system("cls");
-    switch (choix)
+    do
     {
-    case 1:
-        this->bouclePartie(pConsole);
-        break;
-    case 2:
-        std::cout << "regles" <<std::endl;
-        break;
-    case 3:
-        std::cout << "quitter" <<std::endl;
-        break;
-    }
+
+        std::cout << " Bienvenue dans notre jeu SIAM !" <<std::endl;
+        std::cout << " Que voulez vous faire ?" <<std::endl;
+        std::cout << " 1. Jouer" <<std::endl;
+        std::cout << " 2. Voir les regles" <<std::endl;
+        std::cout << " 3. Quitter" <<std::endl;
+        std::cin >> choix;
+        system("cls");
+        switch (choix)
+        {
+        case 1:
+            this->bouclePartie(pConsole);
+            break;
+        case 2:
+            std::cout << "Regles" <<std::endl;
+            std::cout << "Le jeu se compose d'un plateau ou 2 joueurs disposent de 5 animaux chacun." <<std::endl;
+            std::cout << "Le premier joueur utilise des elephants et le second des rhinoceros." <<std::endl;
+            std::cout << "Le but du jeu est de faire sortir une montagne du terrain, se situant au milieu du plateau" <<std::endl;
+            std::cout << "Le gagnant est le joueur qui possede l'animal le plus proche de la montagne" <<std::endl;
+            std::cout << "dans le sens de la poussee." <<std::endl<<endl;
+            std::cout << "Les joueurs ont la possibilite de faire rentrer leurs pions sur les bords du terrain" <<std::endl;
+            std::cout << "dans la direction qu'ils souhaitent." <<std::endl;
+            std::cout << "Ils peuvent ensuite les faire sortir pour pouvoir les reutiliser plus tard" <<std::endl<<endl;
+            break;
+        case 3:
+            std::cout << "Quitter" <<std::endl;
+            break;
+        }
+    }while(choix!=27);
 }
 void Partie::afficher(Console*pConsole)
 {

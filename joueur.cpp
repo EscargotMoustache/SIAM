@@ -11,7 +11,6 @@ Joueur::Joueur(std::string _nom)
     for (int i=0;i<5;i++)
     {
         m_animaux.push_back(Animal(_nom,1,false,1));
-        //R_vect.push_back(Animal("R",1,false,1));
     }
 }
 

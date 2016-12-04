@@ -22,14 +22,18 @@ void Partie::bouclePartie(Console *pConsole)
 {
     char y, orientation;
     int lig, col;
+    int tour = 0;
+
     do
     {
+        int joueur_actuel = tour % 2;
         this->afficher(pConsole);
         pConsole->gotoLigCol(7,0);
 
         cout << " Que voulez-vous faire ?" << endl;
         cout << " a. Faire entrer un pion" << endl;
         cout << " d. Deplacer un pion sur le plateau" << endl;
+        cout << " p. Pousser avec un pion" << endl;
         cout << " s. Sortir un pion du plateau" << endl;
 
         cin >> y;
@@ -50,7 +54,7 @@ void Partie::bouclePartie(Console *pConsole)
             }
             else
             {
-                this->m_joueurs[0].entrerAnimal(this->m_plateau, orientation, lig - 1, col - 1);
+                this->m_joueurs[joueur_actuel].entrerAnimal(this->m_plateau, orientation, lig - 1, col - 1);
             }
         }
         else if (y == 'd')
@@ -84,7 +88,7 @@ void Partie::bouclePartie(Console *pConsole)
                 cin >> pion;
                 if (pion <= compteur)
                 {
-                    auto temp_animal = disponibles.at(pion - 1);
+                    Animal* temp_animal = disponibles.at(pion - 1);
 
                     cout << "Ou souhaitez-vous le déplacer ? " << endl;
                     cout << "Ligne : ";
@@ -94,10 +98,13 @@ void Partie::bouclePartie(Console *pConsole)
                     cout << "Orientation : ";
                     cin >> orientation;
 
-                    if ((lig == temp_animal->get_lig() + 1 || lig == temp_animal->get_lig() - 1) &&
-                        (col == temp_animal->get_col() + 1 || col == temp_animal->get_col() - 1))
+                    lig--;
+                    col--;
+
+                    if ((lig == temp_animal->get_lig() + 1 || lig == temp_animal->get_lig() - 1 || lig == temp_animal->get_lig()) &&
+                        (col == temp_animal->get_col() + 1 || col == temp_animal->get_col() - 1 || col == temp_animal->get_col()))
                     {
-                        //this->m_plateau.get_plateau().at(i).at(j)
+                        this->m_joueurs[joueur_actuel].deplacerAnimal(this->m_plateau, temp_animal, orientation, lig, col);
                     }
                     else
                     {
@@ -112,6 +119,56 @@ void Partie::bouclePartie(Console *pConsole)
                     while(!pConsole->isKeyboardPressed());
                 }
             }
+
+        }
+        else if (y == 's')
+        {
+            vector<Animal*> disponibles;
+            int compteur = 0, pion;
+
+            cout << "Pions disponibles au deplacement : " << endl;
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    if (!(this->m_plateau.get_plateau().at(i).at(j).get_animal() == nullptr))
+                    {
+                        if (!((j >= 1 && j <= 5 && (i == 0 || i == 5)) ||
+                              (i >= 1 && i <= 5 && (j == 1 || j == 5))))
+                        {
+                            compteur++;
+                            cout << compteur << ". " << this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() << " en " << i + 1 << ", " << j + 1 << endl;
+                            disponibles.push_back(this->m_plateau.get_plateau().at(i).at(j).get_animal());
+                        }
+                    }
+                }
+            }
+
+            if (compteur == 0)
+            {
+                cout << "Aucun pion ne peut sortir !";
+                while(!pConsole->isKeyboardPressed());
+            }
+            else
+            {
+                cout << "Quel pion souhaitez-vous sortir ? ";
+                cin >> pion;
+                if (pion <= compteur)
+                {
+                    Animal* temp_animal = disponibles.at(pion - 1);
+
+                    this->m_joueurs[joueur_actuel].sortirAnimal(temp_animal, this->m_plateau);
+                }
+                else
+                {
+                    cout << "Ce pion n'existe pas !";
+                    while(!pConsole->isKeyboardPressed());
+                }
+            }
+        }
+        else if (y == 'p')
+        {
 
         }
 

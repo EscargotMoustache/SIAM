@@ -4,8 +4,9 @@ using namespace std;
 
 int main()
 {
-    Console*pConsole;
+    Console *pConsole;
     Partie part;
+
     part.menu(pConsole);
     return 0;
 }

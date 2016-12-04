@@ -23,6 +23,7 @@ public:
     ~Plateau();
     void set_case(int x, int y, Animal *animal);
     Case get_case(int x, int y) const;
+    void clear_case(int x, int y);
     std::vector<std::vector<Case> > get_plateau() const;
 };
 

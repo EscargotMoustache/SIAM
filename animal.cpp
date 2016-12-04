@@ -25,3 +25,4 @@ void Animal::set_dir(char _direction)
 {
     m_direction = _direction;
 }
+

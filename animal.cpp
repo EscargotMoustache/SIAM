@@ -13,3 +13,11 @@ Animal::~Animal()
 {
 
 }
+char Animal::getdir() const
+{
+    return m_direction;
+}
+void Animal::setdir(char _direction)
+{
+    m_direction=_direction;
+}

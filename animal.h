@@ -21,6 +21,8 @@ public:
     void orienter();
     void pousser();
     void sortir();
+    char getdir() const;
+    void setdir(char _direction);
 };
 
 #endif // ANIMAL_H_INCLUDED

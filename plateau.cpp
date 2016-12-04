@@ -10,6 +10,7 @@ Plateau::~Plateau()
 {
 
 }
+
 void Plateau::afficherPlateau(Plateau plat,std::vector<Animal> E,std::vector<Animal> R,Console*pConsole,int i)
 {
     cout << "        A B C D E   "<<endl;

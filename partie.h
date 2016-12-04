@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstdlib>
+#include <stdlib.h>
 
 // Headers du projet
 #include "plateau.h"
@@ -20,7 +22,7 @@ public:
     Partie();
     ~Partie();
     void bouclePartie();
-    void menu();
+    void menu(int* choix);
 };
 
 #endif // PARTIE_H_INCLUDED

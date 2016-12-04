@@ -20,7 +20,7 @@ private:
 
 public:
     Plateau();
-    Plateau(std::vector<std::vector<Case> > m_case);
+    Plateau(std::vector<std::vector<Case> > _case);
     ~Plateau();
     void afficherPlateau(Plateau plat,std::vector<Animal> E,std::vector<Animal> R,Console*pConsole,int i);
 };

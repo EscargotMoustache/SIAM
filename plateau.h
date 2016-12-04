@@ -9,6 +9,7 @@
 #include "pion.h"
 #include "console.h"
 #include "case.h"
+#include "animal.h"
 
 class Plateau {
 private:
@@ -21,7 +22,7 @@ public:
     Plateau();
     Plateau(std::vector<std::vector<Case> > m_case);
     ~Plateau();
-    void afficherPlateau();
+    void afficherPlateau(Plateau plat,std::vector<Animal> E,std::vector<Animal> R,Console*pConsole,int i);
 };
 
 #endif // PLATEAU_H_INCLUDED

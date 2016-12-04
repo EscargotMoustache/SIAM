@@ -7,6 +7,7 @@
 
 // Headers du projet
 #include "animal.h"
+#include "plateau.h"
 
 class Joueur {
 private:
@@ -17,12 +18,12 @@ public:
     Joueur();
     Joueur(std::string _nom);
     ~Joueur();
-    void entrerAnimal();
+    void entrerAnimal(Plateau& plat, char orientation, int x, int y);
     void deplacerAnimal();
     void orienterAnimal();
     void sortirAnimal();
     void pousserAnimal();
-    std::vector<Animal> getanimaux() const;
+    std::vector<Animal> get_animaux() const;
 
 };
 

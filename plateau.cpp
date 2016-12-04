@@ -19,3 +19,13 @@ Plateau::~Plateau()
 {
 
 }
+
+void Plateau::set_case(int x, int y, Animal *animal)
+{
+    this->m_case.at(x).at(y).set_animal(animal);
+}
+
+std::vector<std::vector<Case> > Plateau::get_plateau() const
+{
+    return m_case;
+}

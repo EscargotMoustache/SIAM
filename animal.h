@@ -14,15 +14,14 @@ private:
 
 public:
     Animal();
-    Animal(std::string _nom,float _resistance, bool _actif,float _force);
+    Animal(std::string _nom, float _resistance, bool _actif, float _force);
     ~Animal();
     void entrer();
     void deplacer();
-    void orienter();
     void pousser();
     void sortir();
-    char getdir() const;
-    void setdir(char _direction);
+    char get_dir() const;
+    void set_dir(char _direction);
 };
 
 #endif // ANIMAL_H_INCLUDED

@@ -21,7 +21,9 @@ private:
 public:
     Plateau();
     ~Plateau();
-    void afficherPlateau(Console*pConsole);
+    void set_case(int x, int y, Animal *animal);
+    Case get_case(int x, int y) const;
+    std::vector<std::vector<Case> > get_plateau() const;
 };
 
 #endif // PLATEAU_H_INCLUDED

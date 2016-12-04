@@ -16,27 +16,32 @@ Pion::~Pion()
 
 }
 
-float Pion::getresistance() const
+float Pion::get_resistance() const
 {
     return m_resistance;
 }
-int Pion::getlig() const
+
+int Pion::get_lig() const
 {
     return m_lig;
 }
-int Pion::getcol() const
+
+int Pion::get_col() const
 {
     return m_col;
 }
-std::string Pion::getnom() const
+
+std::string Pion::get_nom() const
 {
     return m_nom;
 }
-void Pion::setlig(int _ligne)
+
+void Pion::set_lig(int _ligne)
 {
     m_lig=_ligne;
 }
-void Pion::setcol(int _col)
+
+void Pion::set_col(int _col)
 {
     m_col=_col;
 }

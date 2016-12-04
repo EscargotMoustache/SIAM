@@ -15,6 +15,7 @@ private:
 
 public:
     Joueur();
+    Joueur(std::string _nom,std::vector<Animal> _animaux);
     ~Joueur();
     void entrerAnimal(std::vector<Animal>& E, std::vector<Animal>& R, int*tour);
     void deplacerAnimal();

@@ -18,7 +18,12 @@ public:
     Pion();
     Pion(std::string _nom,float _resistance,bool _actif);
     ~Pion();
+    float getresistance() const;
+    int getlig() const;
+    int getcol() const;
     std::string getnom() const;
+    void setlig(int _ligne);
+    void setcol(int _col);
 };
 
 #endif // PION_H_INCLUDED

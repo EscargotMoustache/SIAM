@@ -11,8 +11,21 @@ Partie::~Partie()
 {
 
 }
+void Partie::bouclePartie(Plateau plat,Joueur jou,std::vector<Animal> E_vect,std::vector<Animal> R_vect,Console*pConsole,int i,int _nbTour)
+{
+    char y;
+    do
+    {
+        plat.afficherPlateau(plat,E_vect,R_vect,pConsole,i);
+        pConsole->gotoLigCol(7,0);
+        std::cin >> y;
+        //jou.entrerAnimal(E_vect,R_vect,_nbTour);
+        system("cls");
 
-void Partie::menu(int* choix)
+
+    }while(y!='q');
+}
+void Partie::menu(Partie part,Plateau plat,Joueur jou,std::vector<Animal> E_vect,std::vector<Animal> R_vect,Console*pConsole,int i,int _nbtour,int*choix)
 {
     std::cout << " Bienvenu dans notre jeu SIAM !" <<std::endl;
     std::cout << " Que voulez vous faire ?" <<std::endl;
@@ -24,7 +37,8 @@ void Partie::menu(int* choix)
     switch (*choix)
     {
     case 1:
-        std::cout << "jouer" << std::endl;
+        //std::cout << "jouer" << std::endl;
+        part.bouclePartie(plat,jou,E_vect,R_vect,pConsole,i,_nbtour);
         break;
     case 2:
         std::cout << "regles" <<std::endl;
@@ -32,7 +46,5 @@ void Partie::menu(int* choix)
     case 3:
         std::cout << "quitter" <<std::endl;
         break;
-
     }
-
 }

@@ -29,24 +29,7 @@ int main()
         R_vect.push_back(Animal("R",1,false,1));
     }
 
-    part.menu(choix);
-    //affichage(plat,E_vect,R_vect,pConsole,j);
-   /* plat.afficherPlateau(plat,E_vect,R_vect,pConsole,i);
-    pConsole->gotoLigCol(7,0);
-    ///faut dire bonjour quand meme
-    cout << "Hello world!" << endl;
-*/
-    do
-    {
-        cin >> x;
-       /* cin >> choix;
+    part.menu(part,plat,jou,E_vect,R_vect,pConsole,i,tour,choix);
 
-        jou.entrerAnimal(E_vect,R_vect,adresse_tour);
-        system("cls");
-        plat.afficherPlateau(plat,E_vect,R_vect,pConsole,i);
-        pConsole->gotoLigCol(7,0);*/
-    }while(x!='o');
-
-    pConsole->gotoLigCol(10,0);
     return 0;
 }

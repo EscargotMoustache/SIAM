@@ -17,9 +17,9 @@ Joueur::~Joueur()
 
 }
 
-void Joueur::entrerAnimal(vector<Animal>& E, vector<Animal>& R, int*tour)
+void Joueur::entrerAnimal(vector<Animal>& E, vector<Animal>& R, int _nbtour)
 {
-    if (*tour==1)
+    if (_nbtour==1)
     {
         E.pop_back();
     }

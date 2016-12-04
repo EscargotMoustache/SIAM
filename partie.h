@@ -21,8 +21,8 @@ private:
 public:
     Partie();
     ~Partie();
-    void bouclePartie();
-    void menu(int* choix);
+    void bouclePartie(Plateau plat,Joueur jou,std::vector<Animal> E_vect,std::vector<Animal> R_vect,Console*pConsole,int i,int _nbtour);
+    void menu(Partie part,Plateau plat,Joueur jou,std::vector<Animal> E_vect,std::vector<Animal> R_vect,Console*pConsole,int i,int _nbtour,int*choix);
 };
 
 #endif // PARTIE_H_INCLUDED

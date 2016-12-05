@@ -4,6 +4,7 @@ Pion::Pion()
 {
 
 }
+
 Pion::Pion(std::string _nom,float _resistance, bool _actif)
 {
     m_nom=_nom;

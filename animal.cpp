@@ -21,8 +21,16 @@ char Animal::get_dir() const
     return m_direction;
 }
 
-void Animal::set_dir(char _direction)
+void Animal::set_dir(char direction)
 {
-    m_direction = _direction;
+    m_direction = direction;
+}
+
+float Animal::get_force(char direction) const
+{
+    if (direction == get_dir())
+        return m_force;
+    else
+        return 0.f;
 }
 

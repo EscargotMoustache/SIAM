@@ -11,6 +11,18 @@ Partie::Partie()
     Joueur j2("R");
     m_joueurs.push_back(j1);
     m_joueurs.push_back(j2);
+
+    m_plateau = Plateau();
+
+    for (int i = 0; i < 3; i++)
+    {
+        m_montagnes.push_back(Pion("M", 0.9f, true));
+    }
+
+    for (int i = 1; i < 4; i++)
+    {
+        this->m_plateau.set_case(i, 2, &m_montagnes.at(i - 1));
+    }
 }
 
 Partie::~Partie()
@@ -30,11 +42,12 @@ void Partie::bouclePartie(Console *pConsole)
         this->afficher(pConsole);
         pConsole->gotoLigCol(7,0);
 
-        cout << " Que voulez-vous faire ?" << endl;
+        cout << " Joueur " << this->m_joueurs[joueur_actuel].get_nom() << " que voulez-vous faire ?" << endl;
         cout << " a. Faire entrer un pion" << endl;
         cout << " d. Deplacer un pion sur le plateau" << endl;
         cout << " p. Pousser avec un pion" << endl;
         cout << " s. Sortir un pion du plateau" << endl;
+        cout << " q. Quitter la partie" << endl;
 
         cin >> y;
         if (y == 'a')
@@ -46,7 +59,7 @@ void Partie::bouclePartie(Console *pConsole)
             cout << "Quelle orientation ? (h, b, g, d) : ";
             cin >> orientation;
 
-            if (!((col >= 1 && col <= 5 && (lig == 0 || lig == 5)) ||
+            if (!((col >= 1 && col <= 5 && (lig == 1 || lig == 5)) ||
                   (lig >= 1 && lig <= 5 && (col == 1 || col == 5))))
             {
                 cout << "Position invalide !";
@@ -68,7 +81,7 @@ void Partie::bouclePartie(Console *pConsole)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (!(this->m_plateau.get_plateau().at(i).at(j).get_animal() == nullptr))
+                    if (this->m_plateau.get_plateau().at(i).at(j).get_animal() != nullptr)
                     {
                         compteur++;
                         cout << compteur << ". " << this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() << " en " << i + 1 << ", " << j + 1 << endl;
@@ -132,7 +145,7 @@ void Partie::bouclePartie(Console *pConsole)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (!(this->m_plateau.get_plateau().at(i).at(j).get_animal() == nullptr))
+                    if (this->m_plateau.get_plateau().at(i).at(j).get_animal() != nullptr)
                     {
                         if (!((j >= 1 && j <= 5 && (i == 0 || i == 5)) ||
                               (i >= 1 && i <= 5 && (j == 1 || j == 5))))
@@ -169,7 +182,49 @@ void Partie::bouclePartie(Console *pConsole)
         }
         else if (y == 'p')
         {
+            vector<Animal*> disponibles;
+            int compteur = 0, pion;
 
+            cout << "Pions disponibles pour pousser : " << endl;
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    if (this->m_plateau.get_plateau().at(j).at(i).get_animal() != nullptr)
+                    {
+                        if (this->m_plateau.is_case_surrounded(i, j))
+                        {
+                            compteur++;
+                            cout << compteur << ". " << this->m_plateau.get_plateau().at(j).at(i).get_animal()->get_nom() << " en " << i + 1 << ", " << j + 1 << endl;
+                            disponibles.push_back(this->m_plateau.get_plateau().at(j).at(i).get_animal());
+                        }
+                    }
+                }
+            }
+
+            if (compteur == 0)
+            {
+                cout << "Aucun pion ne peut pousser !";
+                while(!pConsole->isKeyboardPressed());
+            }
+            else
+            {
+                cout << "Quel pion souhaitez-vous faire pousser ? ";
+                cin >> pion;
+                if (pion <= compteur)
+                {
+                    Animal* temp_animal = disponibles.at(pion - 1);
+
+                    this->m_joueurs[joueur_actuel].pousserAnimal(temp_animal, this->m_plateau);
+                    while(!pConsole->isKeyboardPressed());
+                }
+                else
+                {
+                    cout << "Ce pion n'existe pas !";
+                    while(!pConsole->isKeyboardPressed());
+                }
+            }
         }
 
         system("cls");
@@ -182,6 +237,7 @@ void Partie::menu(Console *pConsole)
     int choix = 0;
     do
     {
+        choix = 0;
         cout << " Bienvenue dans notre jeu SIAM !" << endl;
         cout << " Que voulez vous faire ?" << endl;
         cout << " 1. Jouer" << endl;
@@ -231,8 +287,10 @@ void Partie::afficher(Console *pConsole)
 
         for (int j = 0; j < 5; j++)
         {
-            if (this->m_plateau.get_plateau().at(i).at(j).get_animal() == nullptr)
+            if (this->m_plateau.get_plateau().at(i).at(j).get_animal() == nullptr && this->m_plateau.get_plateau().at(i).at(j).get_montagne() == nullptr)
                 cout << " -";
+            else if (this->m_plateau.get_plateau().at(i).at(j).get_montagne() != nullptr)
+                cout << " " << this->m_plateau.get_plateau().at(i).at(j).get_montagne()->get_nom();
             else
                 cout << " " << this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom();
         }
@@ -241,11 +299,11 @@ void Partie::afficher(Console *pConsole)
     }
 
     pConsole->gotoLigCol(1, 1);
-
     for ( auto& elem : this->m_joueurs[0].get_animaux())
     {
         cout << elem.get_nom()<< endl << " " ;
     }
+
     pConsole->gotoLigCol(1,20);
     for ( auto& elem : this->m_joueurs[1].get_animaux())
     {

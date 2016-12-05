@@ -13,6 +13,7 @@ class Joueur {
 private:
     std::vector<Animal> m_animaux;
     std::string m_nom;
+    bool m_victoire;
 
 public:
     Joueur();
@@ -22,8 +23,9 @@ public:
     void deplacerAnimal(Plateau& plat, Animal* animal, char orientation, int x, int y);
     void orienterAnimal();
     void sortirAnimal(Animal* animal, Plateau& plat);
-    void pousserAnimal();
+    void pousserAnimal(Animal* anima, Plateau& plat);
     std::vector<Animal> get_animaux() const;
+    std::string get_nom() const;
 
 };
 

@@ -17,6 +17,7 @@ private:
     Plateau m_plateau;
     int m_nbTour;
     std::vector<Joueur> m_joueurs;
+    std::vector<Pion> m_montagnes;
 
 public:
     Partie();

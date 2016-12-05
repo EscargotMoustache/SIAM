@@ -16,12 +16,9 @@ public:
     Animal();
     Animal(std::string _nom, float _resistance, bool _actif, float _force);
     ~Animal();
-    void entrer();
-    void deplacer();
-    void pousser();
-    void sortir();
     char get_dir() const;
-    void set_dir(char _direction);
+    void set_dir(char direction);
+    float get_force(char direction) const;
 };
 
 #endif // ANIMAL_H_INCLUDED

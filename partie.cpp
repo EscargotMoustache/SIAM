@@ -158,7 +158,7 @@ void Partie::bouclePartie(Console *pConsole)
                 {
                     if (this->m_plateau.get_plateau().at(i).at(j).get_animal() != nullptr && this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() == this->m_joueurs[joueur_actuel].get_nom())
                     {
-                        if (!((j >= 1 && j <= 5 && (i == 0 || i == 5)) ||
+                        if (!((j >= 1 && j <= 5 && (i == 1 || i == 5)) ||
                               (i >= 1 && i <= 5 && (j == 1 || j == 5))))
                         {
                             compteur++;
@@ -203,13 +203,13 @@ void Partie::bouclePartie(Console *pConsole)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (this->m_plateau.get_plateau().at(j).at(i).get_animal() != nullptr && this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() == this->m_joueurs[joueur_actuel].get_nom())
+                    if (this->m_plateau.get_plateau().at(i).at(j).get_animal() != nullptr && this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() == this->m_joueurs[joueur_actuel].get_nom())
                     {
-                        if (this->m_plateau.is_case_surrounded(i, j))
+                        if (this->m_plateau.is_case_surrounded(j, i))
                         {
                             compteur++;
-                            cout << compteur << ". " << this->m_plateau.get_plateau().at(j).at(i).get_animal()->get_nom() << " en " << i + 1 << ", " << j + 1 << endl;
-                            disponibles.push_back(this->m_plateau.get_plateau().at(j).at(i).get_animal());
+                            cout << compteur << ". " << this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() << " en " << i + 1 << ", " << j + 1 << endl;
+                            disponibles.push_back(this->m_plateau.get_plateau().at(i).at(j).get_animal());
                         }
                     }
                 }
@@ -231,6 +231,7 @@ void Partie::bouclePartie(Console *pConsole)
                     if (this->m_joueurs[joueur_actuel].pousserAnimal(temp_animal, this->m_plateau) == true)
                     {
                         tour++;
+                        while(!pConsole->isKeyboardPressed());
                     }
                     else
                     {
@@ -255,7 +256,6 @@ void Partie::bouclePartie(Console *pConsole)
             int compteur = 0, pion;
 
             cout << "Pions disponibles : " << endl;
-            cout << this->m_joueurs[joueur_actuel].get_nom() << endl;
 
             for (int i = 0; i < 5; i++)
             {

@@ -50,6 +50,7 @@ void Joueur::deplacerAnimal(Plateau& plat, Animal* animal, char orientation, int
 {
     plat.clear_case(animal->get_lig(), animal->get_col());
     plat.set_case(x, y, animal);
+    animal->set_dir(orientation);
     animal->set_lig(x);
     animal->set_col(y);
 }
@@ -84,7 +85,7 @@ bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
     {
     case 'h':
         x_pousse = animal->get_col();
-        y_pousse = animal->get_lig() - 1;
+        y_pousse = 0;
         y_max = 0;
 
         for (int i = animal->get_lig(); i >= 0; i--)
@@ -96,13 +97,14 @@ bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
             else if (cases.at(i).at(x).get_animal() == nullptr && cases.at(i).at(x).get_montagne() == nullptr)
             {
                 y_max = i + 1;
+                if (y_pousse == 0)
+                    y_pousse = i + 1;
                 break;
             }
             else if (cases.at(i).at(x).get_montagne() != nullptr || (cases.at(i).at(x).get_animal() != nullptr && cases.at(i).at(x).get_animal()->get_dir() == 'b'))
             {
-                y_pousse = i;
-                y_max = i;
-                break;
+                if (y_pousse == 0)
+                    y_pousse = i;
             }
         }
 
@@ -123,7 +125,7 @@ bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
 
         if (force > resistance)
         {
-            for (int i = y_max; i < 5; i++)
+            for (int i = y_max; i <= y_pousse + 1; i++)
             {
                 if (cases.at(i).at(x).get_montagne() != nullptr)
                 {
@@ -137,7 +139,7 @@ bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
                     {
                         m_victoire = true;
                     }
-                    plat.clear_case(y, i);
+                    plat.clear_case(i, x);
                 }
                 else if (cases.at(i).at(x).get_animal() != nullptr)
                 {
@@ -167,7 +169,7 @@ bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
         break;
     case 'b':
         x_pousse = animal->get_col();
-        y_pousse = animal->get_lig() + 1;
+        y_pousse = 0;
         y_max = 4;
 
         for (int i = animal->get_lig(); i < 5; i++)
@@ -179,13 +181,14 @@ bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
             else if (cases.at(i).at(x).get_animal() == nullptr && cases.at(i).at(x).get_montagne() == nullptr)
             {
                 y_max = i - 1;
+                if (y_pousse == 0)
+                    y_pousse = i - 1;
                 break;
             }
             else if (cases.at(i).at(x).get_montagne() != nullptr || (cases.at(i).at(x).get_animal() != nullptr && cases.at(i).at(x).get_animal()->get_dir() == 'h'))
             {
-                y_pousse = i;
-                y_max = i;
-                break;
+                if (y_pousse == 0)
+                    y_pousse = i;
             }
         }
 
@@ -204,11 +207,9 @@ bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
             }
         }
 
-        cout << y_max << endl << y_pousse << endl;
-
         if (force > resistance)
         {
-            for (int i = y_max; i >= 0; i--)
+            for (int i = y_max; i >= y_pousse - 1; i--)
             {
                 if (cases.at(i).at(x).get_montagne() != nullptr)
                 {
@@ -251,7 +252,7 @@ bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
         }
         break;
     case 'd':
-        x_pousse = animal->get_col() + 1;
+        x_pousse = 0;
         y_pousse = animal->get_lig();
         x_max = 4;
 
@@ -264,13 +265,14 @@ bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
             else if (cases.at(y).at(i).get_animal() == nullptr && cases.at(y).at(i).get_montagne() == nullptr)
             {
                 x_max = i - 1;
+                if (x_pousse == 0)
+                    x_pousse = i - 1;
                 break;
             }
             else if (cases.at(y).at(i).get_montagne() != nullptr || (cases.at(y).at(i).get_animal() != nullptr && cases.at(y).at(i).get_animal()->get_dir() == 'g'))
             {
-                x_pousse = i;
-                x_max = i;
-                break;
+                if (x_pousse == 0)
+                    x_pousse = i;
             }
         }
 
@@ -291,9 +293,7 @@ bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
 
         if (force > resistance)
         {
-            cout << x_max << endl << x_pousse << endl;
-
-            for (int i = x_max; i >= 0; i--)
+            for (int i = x_max; i >= x; i--)
             {
                 if (cases.at(y).at(i).get_montagne() != nullptr)
                 {
@@ -337,7 +337,7 @@ bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
 
         break;
     case 'g':
-        x_pousse = animal->get_col() - 1;
+        x_pousse = 0;
         y_pousse = animal->get_lig();
         x_max = 0;
 
@@ -350,13 +350,14 @@ bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
             else if (cases.at(y).at(i).get_animal() == nullptr && cases.at(y).at(i).get_montagne() == nullptr)
             {
                 x_max = i + 1;
+                if (x_pousse == 0)
+                    x_pousse = i + 1;
                 break;
             }
             else if (cases.at(y).at(i).get_montagne() != nullptr || (cases.at(y).at(i).get_animal() != nullptr && cases.at(y).at(i).get_animal()->get_dir() == 'd'))
             {
-                x_pousse = i;
-                x_max = i;
-                break;
+                if (x_pousse == 0)
+                    x_pousse = i;
             }
         }
 
@@ -377,7 +378,7 @@ bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
 
         if (force > resistance)
         {
-            for (int i = x_max; i >= 0; i--)
+            for (int i = x_max; i <= x_pousse + 1; i++)
             {
                 if (cases.at(y).at(i).get_montagne() != nullptr)
                 {

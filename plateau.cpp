@@ -6,7 +6,7 @@ Plateau::Plateau()
 {
     for (int i=0;i<5;i++)
     {
-        std::vector <Case> ligne;
+        vector <Case> ligne;
         for (int j=0;j<5;j++)
         {
             ligne.push_back(Case(j, i));
@@ -36,7 +36,7 @@ void Plateau::clear_case(int x, int y)
     this->m_case.at(x).at(y).remove_montagne();
 }
 
-std::vector<std::vector<Case> > Plateau::get_plateau() const
+vector<vector<Case> > Plateau::get_plateau() const
 {
     return m_case;
 }

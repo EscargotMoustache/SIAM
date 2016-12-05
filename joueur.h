@@ -21,9 +21,10 @@ public:
     ~Joueur();
     void entrerAnimal(Plateau& plat, char orientation, int x, int y);
     void deplacerAnimal(Plateau& plat, Animal* animal, char orientation, int x, int y);
-    void orienterAnimal();
+    void orienterAnimal(Animal* animal, char orientation);
     void sortirAnimal(Animal* animal, Plateau& plat);
     bool pousserAnimal(Animal* anima, Plateau& plat);
+    bool get_victoire() const;
     std::vector<Animal> get_animaux() const;
     std::string get_nom() const;
 

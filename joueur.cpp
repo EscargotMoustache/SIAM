@@ -54,9 +54,19 @@ void Joueur::deplacerAnimal(Plateau& plat, Animal* animal, char orientation, int
     animal->set_col(y);
 }
 
+bool Joueur::get_victoire() const
+{
+    return m_victoire;
+}
+
 string Joueur::get_nom() const
 {
     return m_nom;
+}
+
+void Joueur::orienterAnimal(Animal* animal, char orientation)
+{
+    animal->set_dir(orientation);
 }
 
 bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)

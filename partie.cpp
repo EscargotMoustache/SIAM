@@ -45,6 +45,7 @@ void Partie::bouclePartie(Console *pConsole)
         cout << " Joueur " << this->m_joueurs[joueur_actuel].get_nom() << " que voulez-vous faire ? (Tour " << tour + 1 << ")" << endl;
         cout << " a. Faire entrer un pion" << endl;
         cout << " d. Deplacer un pion sur le plateau" << endl;
+        cout << " o. Orienter un pion" << endl;
         cout << " p. Pousser avec un pion" << endl;
         cout << " s. Sortir un pion du plateau" << endl;
         cout << " q. Quitter la partie" << endl;
@@ -67,8 +68,16 @@ void Partie::bouclePartie(Console *pConsole)
             }
             else
             {
-                this->m_joueurs[joueur_actuel].entrerAnimal(this->m_plateau, orientation, lig - 1, col - 1);
-                tour++;
+                if (this->m_plateau.get_plateau().at(lig - 1).at(col - 1).get_animal() == nullptr)
+                {
+                    this->m_joueurs[joueur_actuel].entrerAnimal(this->m_plateau, orientation, lig - 1, col - 1);
+                    tour++;
+                }
+                else
+                {
+                    cout << "Position invalide !";
+                    while(!pConsole->isKeyboardPressed());
+                }
             }
         }
         else if (y == 'd')
@@ -240,6 +249,55 @@ void Partie::bouclePartie(Console *pConsole)
                 }
             }
         }
+        else if (y == 'o')
+        {
+            vector<Animal*> disponibles;
+            int compteur = 0, pion;
+
+            cout << "Pions disponibles : " << endl;
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    if (this->m_plateau.get_plateau().at(i).at(j).get_animal() != nullptr && this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() == this->m_joueurs[joueur_actuel].get_nom())
+                    {
+                        if (!((j >= 1 && j <= 5 && (i == 0 || i == 5)) ||
+                              (i >= 1 && i <= 5 && (j == 1 || j == 5))))
+                        {
+                            compteur++;
+                            cout << compteur << ". " << this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() << " en " << i + 1 << ", " << j + 1 << endl;
+                            disponibles.push_back(this->m_plateau.get_plateau().at(i).at(j).get_animal());
+                        }
+                    }
+                }
+            }
+
+            if (compteur == 0)
+            {
+                cout << "Aucun pion disponible !";
+                while(!pConsole->isKeyboardPressed());
+            }
+            else
+            {
+                cout << "Quel pion souhaitez-vous orienter ? ";
+                cin >> pion;
+                cout << "Dans quelle direction ? (h, b, g, d) ";
+                cin >> orientation;
+                if (pion <= compteur)
+                {
+                    Animal* temp_animal = disponibles.at(pion - 1);
+
+                    this->m_joueurs[joueur_actuel].orienterAnimal(temp_animal, orientation);
+                    tour++;
+                }
+                else
+                {
+                    cout << "Ce pion n'existe pas !";
+                    while(!pConsole->isKeyboardPressed());
+                }
+            }
+        }
 
         system("cls");
 
@@ -297,16 +355,16 @@ void Partie::afficher(Console *pConsole)
 
     for (int i = 0; i < 5; i++)
     {
-        cout << "     " << i + 1 << " ";
+        cout << "     " << i + 1 << "  ";
 
         for (int j = 0; j < 5; j++)
         {
             if (this->m_plateau.get_plateau().at(i).at(j).get_animal() == nullptr && this->m_plateau.get_plateau().at(i).at(j).get_montagne() == nullptr)
-                cout << " -";
+                cout << "- ";
             else if (this->m_plateau.get_plateau().at(i).at(j).get_montagne() != nullptr)
-                cout << " " << this->m_plateau.get_plateau().at(i).at(j).get_montagne()->get_nom();
+                cout << this->m_plateau.get_plateau().at(i).at(j).get_montagne()->get_nom() << " ";
             else
-                cout << " " << this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom();
+                cout << this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() << this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_dir();
         }
 
         cout << endl;

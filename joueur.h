@@ -23,7 +23,7 @@ public:
     void deplacerAnimal(Plateau& plat, Animal* animal, char orientation, int x, int y);
     void orienterAnimal();
     void sortirAnimal(Animal* animal, Plateau& plat);
-    void pousserAnimal(Animal* anima, Plateau& plat);
+    bool pousserAnimal(Animal* anima, Plateau& plat);
     std::vector<Animal> get_animaux() const;
     std::string get_nom() const;
 

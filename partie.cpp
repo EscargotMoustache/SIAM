@@ -42,7 +42,7 @@ void Partie::bouclePartie(Console *pConsole)
         this->afficher(pConsole);
         pConsole->gotoLigCol(7,0);
 
-        cout << " Joueur " << this->m_joueurs[joueur_actuel].get_nom() << " que voulez-vous faire ?" << endl;
+        cout << " Joueur " << this->m_joueurs[joueur_actuel].get_nom() << " que voulez-vous faire ? (Tour " << tour + 1 << ")" << endl;
         cout << " a. Faire entrer un pion" << endl;
         cout << " d. Deplacer un pion sur le plateau" << endl;
         cout << " p. Pousser avec un pion" << endl;
@@ -68,6 +68,7 @@ void Partie::bouclePartie(Console *pConsole)
             else
             {
                 this->m_joueurs[joueur_actuel].entrerAnimal(this->m_plateau, orientation, lig - 1, col - 1);
+                tour++;
             }
         }
         else if (y == 'd')
@@ -81,7 +82,7 @@ void Partie::bouclePartie(Console *pConsole)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (this->m_plateau.get_plateau().at(i).at(j).get_animal() != nullptr)
+                    if (this->m_plateau.get_plateau().at(i).at(j).get_animal() != nullptr && this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() == this->m_joueurs[joueur_actuel].get_nom())
                     {
                         compteur++;
                         cout << compteur << ". " << this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() << " en " << i + 1 << ", " << j + 1 << endl;
@@ -103,7 +104,7 @@ void Partie::bouclePartie(Console *pConsole)
                 {
                     Animal* temp_animal = disponibles.at(pion - 1);
 
-                    cout << "Ou souhaitez-vous le déplacer ? " << endl;
+                    cout << "Ou souhaitez-vous le deplacer ? " << endl;
                     cout << "Ligne : ";
                     cin >> lig;
                     cout << "Colonne : ";
@@ -118,6 +119,7 @@ void Partie::bouclePartie(Console *pConsole)
                         (col == temp_animal->get_col() + 1 || col == temp_animal->get_col() - 1 || col == temp_animal->get_col()))
                     {
                         this->m_joueurs[joueur_actuel].deplacerAnimal(this->m_plateau, temp_animal, orientation, lig, col);
+                        tour++;
                     }
                     else
                     {
@@ -139,13 +141,13 @@ void Partie::bouclePartie(Console *pConsole)
             vector<Animal*> disponibles;
             int compteur = 0, pion;
 
-            cout << "Pions disponibles au deplacement : " << endl;
+            cout << "Pions disponibles a la sortie : " << endl;
 
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (this->m_plateau.get_plateau().at(i).at(j).get_animal() != nullptr)
+                    if (this->m_plateau.get_plateau().at(i).at(j).get_animal() != nullptr && this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() == this->m_joueurs[joueur_actuel].get_nom())
                     {
                         if (!((j >= 1 && j <= 5 && (i == 0 || i == 5)) ||
                               (i >= 1 && i <= 5 && (j == 1 || j == 5))))
@@ -172,6 +174,7 @@ void Partie::bouclePartie(Console *pConsole)
                     Animal* temp_animal = disponibles.at(pion - 1);
 
                     this->m_joueurs[joueur_actuel].sortirAnimal(temp_animal, this->m_plateau);
+                    tour++;
                 }
                 else
                 {
@@ -191,7 +194,7 @@ void Partie::bouclePartie(Console *pConsole)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (this->m_plateau.get_plateau().at(j).at(i).get_animal() != nullptr)
+                    if (this->m_plateau.get_plateau().at(j).at(i).get_animal() != nullptr && this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() == this->m_joueurs[joueur_actuel].get_nom())
                     {
                         if (this->m_plateau.is_case_surrounded(i, j))
                         {
@@ -216,8 +219,19 @@ void Partie::bouclePartie(Console *pConsole)
                 {
                     Animal* temp_animal = disponibles.at(pion - 1);
 
-                    this->m_joueurs[joueur_actuel].pousserAnimal(temp_animal, this->m_plateau);
-                    while(!pConsole->isKeyboardPressed());
+                    if (this->m_joueurs[joueur_actuel].pousserAnimal(temp_animal, this->m_plateau) == true)
+                    {
+                        tour++;
+                    }
+                    else
+                    {
+                        while(!pConsole->isKeyboardPressed());
+                    }
+                    if (this->m_joueurs[joueur_actuel].get_victoire() == true)
+                    {
+                        cout << "Le joueur " << this->m_joueurs[joueur_actuel].get_nom() << " gagne la partie !" << endl;
+                        break;
+                    }
                 }
                 else
                 {

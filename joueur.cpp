@@ -59,7 +59,7 @@ string Joueur::get_nom() const
     return m_nom;
 }
 
-void Joueur::pousserAnimal(Animal* animal, Plateau& plat)
+bool Joueur::pousserAnimal(Animal* animal, Plateau& plat)
 {
     int x = animal->get_col();
     int y = animal->get_lig();
@@ -68,6 +68,7 @@ void Joueur::pousserAnimal(Animal* animal, Plateau& plat)
     float resistance = 0.f;
     int x_pousse, y_pousse;
     int x_max, y_max;
+    bool pousse = false;
 
     switch(animal->get_dir())
     {
@@ -147,6 +148,7 @@ void Joueur::pousserAnimal(Animal* animal, Plateau& plat)
                     break;
                 }
             }
+            pousse = true;
         }
         else
         {
@@ -231,6 +233,7 @@ void Joueur::pousserAnimal(Animal* animal, Plateau& plat)
                     break;
                 }
             }
+            pousse = true;
         }
         else
         {
@@ -315,6 +318,7 @@ void Joueur::pousserAnimal(Animal* animal, Plateau& plat)
                     break;
                 }
             }
+            pousse = true;
         }
         else
         {
@@ -398,6 +402,7 @@ void Joueur::pousserAnimal(Animal* animal, Plateau& plat)
                     break;
                 }
             }
+            pousse = true;
         }
         else
         {
@@ -408,4 +413,6 @@ void Joueur::pousserAnimal(Animal* animal, Plateau& plat)
     default:
         break;
     }
+
+    return pousse;
 }

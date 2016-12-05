@@ -255,6 +255,7 @@ void Partie::bouclePartie(Console *pConsole)
             int compteur = 0, pion;
 
             cout << "Pions disponibles : " << endl;
+            cout << this->m_joueurs[joueur_actuel].get_nom() << endl;
 
             for (int i = 0; i < 5; i++)
             {
@@ -262,13 +263,9 @@ void Partie::bouclePartie(Console *pConsole)
                 {
                     if (this->m_plateau.get_plateau().at(i).at(j).get_animal() != nullptr && this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() == this->m_joueurs[joueur_actuel].get_nom())
                     {
-                        if (!((j >= 1 && j <= 5 && (i == 0 || i == 5)) ||
-                              (i >= 1 && i <= 5 && (j == 1 || j == 5))))
-                        {
-                            compteur++;
-                            cout << compteur << ". " << this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() << " en " << i + 1 << ", " << j + 1 << endl;
-                            disponibles.push_back(this->m_plateau.get_plateau().at(i).at(j).get_animal());
-                        }
+                        compteur++;
+                        cout << compteur << ". " << this->m_plateau.get_plateau().at(i).at(j).get_animal()->get_nom() << " en " << i + 1 << ", " << j + 1 << endl;
+                        disponibles.push_back(this->m_plateau.get_plateau().at(i).at(j).get_animal());
                     }
                 }
             }
